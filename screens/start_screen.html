@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Microsoft Teams - Clock in / out</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="../images/icons/teams.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../css/util.css">
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+	<link href="./js/loading.css" rel="stylesheet">
+<!--===============================================================================================-->
+</head>
+<body>
+<header id="titlebar">
+	<div id="drag-region">
+		<div id="window-controls">
+		  <div class="button" id="min-button" onclick="minimizer()">
+			<img class="icon" srcset="../images/icons/min-w-10.png 1x, images/icons/min-w-12.png 1.25x, images/icons/min-w-15.png 1.5x, images/icons/min-w-15.png 1.75x, images/icons/min-w-20.png 2x, images/icons/min-w-20.png 2.25x, images/icons/min-w-24.png 2.5x, images/icons/min-w-30.png 3x, images/icons/min-w-30.png 3.5x" draggable="false" />
+		  </div>
+		  <div class="button" id="max-button" onclick="maximizer()">
+			<img class="icon" srcset="../images/icons/max-w-10.png 1x, images/icons/max-w-12.png 1.25x, images/icons/max-w-15.png 1.5x, images/icons/max-w-15.png 1.75x, images/icons/max-w-20.png 2x, images/icons/max-w-20.png 2.25x, images/icons/max-w-24.png 2.5x, images/icons/max-w-30.png 3x, images/icons/max-w-30.png 3.5x" draggable="false" />
+		  </div>
+		  <div class="button" id="restore-button" onclick="restorer()">
+			<img class="icon" srcset="../images/icons/restore-w-10.png 1x, images/icons/restore-w-12.png 1.25x, images/icons/restore-w-15.png 1.5x, images/icons/restore-w-15.png 1.75x, images/icons/restore-w-20.png 2x, images/icons/restore-w-20.png 2.25x, images/icons/restore-w-24.png 2.5x, images/icons/restore-w-30.png 3x, images/icons/restore-w-30.png 3.5x" draggable="false" />
+		  </div>
+		  <div class="button" id="close-button" onclick="closer()">
+			<img class="icon" srcset="../images/icons/close-w-10.png 1x, images/icons/close-w-12.png 1.25x, images/icons/close-w-15.png 1.5x, images/icons/close-w-15.png 1.75x, images/icons/close-w-20.png 2x, images/icons/close-w-20.png 2.25x, images/icons/close-w-24.png 2.5x, images/icons/close-w-30.png 3x, images/icons/close-w-30.png 3.5x" draggable="false" />
+		  </div>
+		</div>
+		<div id="window-title">
+</div>
+</div>
+	</div>
+</header>
+<contents>
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form id="forms" class="login100-form validate-form">
+					<span class="login100-form-title p-b-48">
+						<img src="../images/teams.png" width="50%" height="50%">
+					</span>
+					<span class="login100-form-title p-b-26">
+						Teams <br>
+						Clock in / out
+					</span>
+
+					<div class="invalid" style="display: none">
+						Invalid credentials
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
+						<input class="input100" type="text" name="email" id="email">
+						<span class="focus-input100" data-placeholder="Email"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<span class="btn-show-pass">
+							<i class="zmdi zmdi-eye"></i>
+						</span>
+						<input class="input100" type="password" name="pass" id="pass">
+						<span class="focus-input100" data-placeholder="Password"></span>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn" onclick="loading()" onsubmit="loading()">
+								Start
+							</button>
+						</div>
+					</div>
+				</form>
+				<div class="modal"><!-- Place at bottom of page --></div>
+			</div>
+		</div>
+	</div>
+</contents>
+	<div id="dropDownSelect1"></div>
+
+	<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+<!--===============================================================================================-->
+	<script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="/js/jquery.loading.js"></script>
+<!--===============================================================================================-->
+	<script src="../vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../vendor/bootstrap/js/popper.js"></script>
+	<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../vendor/daterangepicker/moment.min.js"></script>
+	<script src="../vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="../vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="../js/main.js"></script>
+	<script src="../js/render.js"></script>
+	<script>if (window.module) module = window.module;</script>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+{
+  "name": "ms-teams-shift-clock",
+  "version": "1.0.0",
+  "description": "A simple application for turn in and out ms teams shifts",
+  "main": "teamsapp.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "win": "electron-builder --win",
+    "mac": "electron-builder --mac",
+    "linux": "electron-builder --linux",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "files": [
+    "*.js",
+    "*.png",
+    "*.css",
+    "*.html",
+    "build",
+    "node_modules",
+    "chromedriver.exe"
+  ],
+  "build": {
+    "appId": "com.teams.clock",
+    "productName": "Microsoft Teams - Clock in-out",
+    "copyright": "dermuir",
+    "win": {
+      "target": "nsis",
+      "icon": "images/teams.ico",
+      "publish": "github"
+    },
+    "nsis": {
+      "oneClick": false,
+      "installerIcon": "images/teams.ico",
+      "uninstallerIcon": "images/teams.ico",
+      "uninstallDisplayName": "MS Teams Clock in-out",
+      "installerHeader": "images/teams.bmp",
+      "installerHeaderIcon": "images/teams.ico",
+      "license": "license.txt",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "MS Teams Clock in-out",
+      "allowToChangeInstallationDirectory": true,
+      "runAfterFinish": true,
+      "deleteAppDataOnUninstall": true
+    },
+    "linux": {
+      "target": "AppImage",
+      "executableName": "Microsoft Teams - Clock in-out",
+      "icon": "images/teams.ico",
+      "category": "Utility"
+    },
+    "appImage": {
+      "license": "license.txt",
+      "category": "Utility"
+    },
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.developer-tools",
+      "icon": "images/teams.ico",
+      "type": "distribution"
+    }
+  },
+  "keywords": [],
+  "author": "Dermuir",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^9.0.0",
+    "electron-builder": "^22.8.0"
+  },
+  "dependencies": {
+    "auto-launch": "^5.0.5",
+    "custom-electron-titlebar": "^3.2.3",
+    "jquery-loading": "^0.2.8",
+    "menubar": "^8.0.2",
+    "node-cron": "^2.0.3",
+    "selenium-webdriver": "^4.0.0-alpha.7"
+  }
+}

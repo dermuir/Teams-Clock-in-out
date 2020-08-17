@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Microsoft Teams - Clock in / out</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="../images/icons/teams.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../vendor/animsition/css/animsition.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../css/util.css">
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+	<link rel="stylesheet" type="text/css" href="../css/style_dashboard.css">
+	<link rel="stylesheet" type="text/css" href="../css/dashboard.css">
+	<link rel="stylesheet" type="text/css" href="../css/jquery-weekdays.css">
+<!--===============================================================================================-->
+</head>
+<body>
+<header id="titlebar">
+	<div id="drag-region">
+		<div id="window-controls">
+		  <div class="button" id="min-button" onclick="minimizer()">
+			<img class="icon" srcset="../images/icons/min-w-10.png 1x, images/icons/min-w-12.png 1.25x, images/icons/min-w-15.png 1.5x, images/icons/min-w-15.png 1.75x, images/icons/min-w-20.png 2x, images/icons/min-w-20.png 2.25x, images/icons/min-w-24.png 2.5x, images/icons/min-w-30.png 3x, images/icons/min-w-30.png 3.5x" draggable="false" />
+		  </div>
+		  <div class="button" id="max-button" onclick="maximizer()">
+			<img class="icon" srcset="../images/icons/max-w-10.png 1x, images/icons/max-w-12.png 1.25x, images/icons/max-w-15.png 1.5x, images/icons/max-w-15.png 1.75x, images/icons/max-w-20.png 2x, images/icons/max-w-20.png 2.25x, images/icons/max-w-24.png 2.5x, images/icons/max-w-30.png 3x, images/icons/max-w-30.png 3.5x" draggable="false" />
+		  </div>
+		  <div class="button" id="restore-button" onclick="restorer()">
+			<img class="icon" srcset="../images/icons/restore-w-10.png 1x, images/icons/restore-w-12.png 1.25x, images/icons/restore-w-15.png 1.5x, images/icons/restore-w-15.png 1.75x, images/icons/restore-w-20.png 2x, images/icons/restore-w-20.png 2.25x, images/icons/restore-w-24.png 2.5x, images/icons/restore-w-30.png 3x, images/icons/restore-w-30.png 3.5x" draggable="false" />
+		  </div>
+		  <div class="button" id="close-button" onclick="closer()">
+			<img class="icon" srcset="../images/icons/close-w-10.png 1x, images/icons/close-w-12.png 1.25x, images/icons/close-w-15.png 1.5x, images/icons/close-w-15.png 1.75x, images/icons/close-w-20.png 2x, images/icons/close-w-20.png 2.25x, images/icons/close-w-24.png 2.5x, images/icons/close-w-30.png 3x, images/icons/close-w-30.png 3.5x" draggable="false" />
+		  </div>
+		</div>
+		<div id="window-title">
+</div>
+</div>
+	</div>
+</header>
+
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-data">
+				<span class="title-dashboard p-b-26">
+					<div class="d-flex justify-content-between text-gray-700">
+						<div>
+							Dashboard
+						</div>
+						<div onclick="logout()">
+							<span class="text-center" style="font-size: 25px; padding-right: 15px;">Logout</span><i style="font-size: 30px; padding-right: 15px;" class=" text-right fa fa-sign-out" aria-hidden="true"></i>
+						</div>
+
+						</div>
+			</span>
+				<div class="row">
+				<!-- Earnings (Monthly) Card Example -->
+				<div class="col-xl-4 col-md-6 mb-4">
+				  <div class="card border-left-primary shadow h-100 py-2">
+					<div class="card-body">
+					  <div class="row no-gutters align-items-center">
+						<div class="col mr-2">
+						  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Clock In</div>
+						  <div id="clock-in" class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+						</div>
+						<div class="col-auto">
+						  <i class="fa fa-clock-o fa-2x text-primary" aria-hidden="true"></i>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				</div>
+
+				<!-- Earnings (Monthly) Card Example -->
+				<div class="col-xl 4 col-md-6 mb-4">
+				  <div class="card border-left-primary shadow h-100 py-2">
+					<div class="card-body">
+					  <div class="row no-gutters align-items-center">
+						<div class="col mr-2">
+						  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Clock Out</div>
+						  <div id="clock-out" class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+						</div>
+						<div class="col-auto">
+						  <i class="fa fa-clock-o fa-2x text-primary" aria-hidden="true"></i>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				</div>
+
+
+					<!--&lt;!&ndash; Pending Requests Card Example &ndash;&gt;
+					<div class="col-xl-4 col-md-6 mb-4">
+						<div class="card border-left-success shadow h-100 py-2">
+							<div class="card-body">
+								<div class="row no-gutters align-items-center">
+									<div class="col mr-2">
+										<div class="text-xs font-weight-bold text-success text-uppercase mb-1">Last 7 day clocks (I/O)</div>
+										<div id="week-clock" class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+									</div>
+									<div class="col-auto">
+										<i class="fa fa-calendar-check-o fa-2x text-success" aria-hidden="true"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xl-4 col-md-6 mb-4">
+						<div class="card border-left-warning shadow h-100 py-2">
+							<div class="card-body">
+								<div class="row no-gutters align-items-center">
+									<div class="col mr-2">
+										<div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Last week hours</div>
+										<div id="week-hours" class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+									</div>
+									<div class="col-auto">
+										<i class="fa fa-hourglass-end fa-2x text-warning" aria-hidden="true"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-4 col-md-6 mb-4">
+						<div class="card border-left-secondary shadow h-100 py-2">
+							<div class="card-body">
+								<div class="row no-gutters align-items-center">
+									<div class="col mr-2">
+										<div class="text-xs font-weight-bold text-secondary  text-uppercase mb-1">Last month hours</div>
+										<div id="month-hours" class="h5 mb-0 font-weight-bold text-gray-800">1</div>
+									</div>
+									<div class="col-auto">
+										<i class="fa fa-history fa-2x text-gray-700" aria-hidden="true"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>-->
+					<!-- Earnings (Monthly) Card Example -->
+					<div class="col-xl-4 col-md-6 mb-4">
+						<div class="card border-left-danger shadow h-100 py-2">
+							<div class="card-body">
+								<div class="row no-gutters align-items-center">
+									<div class="col mr-2">
+										<div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Errors</div>
+										<div class="row no-gutters align-items-center">
+											<div class="col-auto">
+												<div id="errors" class="h5 mb-0 mr-3 font-weight-bold text-gray-800 ">1</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-auto">
+										<i class="fa fa-exclamation-triangle fa-2x text-danger " aria-hidden="true"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="wrap-login100">
+				<div class="dashboard-text">
+					  <div class="row ">
+						<div class="col-sm text-center">
+						  Team
+						</div>
+						  <div class="col-sm text-center">
+						  Clock in time
+						</div>
+						  <div class="col-sm text-center">
+						  Clock out time
+						</div>
+						  <div class="col-sm text-center">
+						  Days
+						</div>
+					  </div>
+					</div>
+					<span class="p-t-20 p-b-20">
+						<br>
+					</span>
+					<div class="dashboard-sub-text">
+					  <div class="row ">
+						<div class="col-sm">
+							<select style="color: #5666a2" id="team" class="datetimepicker text-center">
+							  <option value="0" selected>Choose the team</option>
+								<option value="1">Team 1</option>
+								<option value="2">Team 2</option>
+								<option value="3">Team 3</option>
+								<option value="4">Team 4</option>
+								<option value="5">Team 5</option>
+							</select>
+						</div>
+						<div class="col-sm text-center">
+						 <div class="datetimepicker">
+							<input style="color: #5666a2" class="text-center time" type="time" id="time-in" value="23:00">
+						  </div>
+						</div>
+						<div class="col-sm text-center">
+						  <div class="datetimepicker">
+							<input style="color: #5666a2" class=" text-center time" type="time" id="time-out" value="23:00">
+						  </div>
+						</div>
+						  <div class="col-sm text-center">
+						 	<div style="width: 100%" id="weekdays"> </div>
+						</div>
+					  </div>
+					</div>
+
+					<span class="p-t-20 p-b-20">
+						<br>
+						<p id="status" class="status text-center">Inactive</p>
+					</span>
+					<span class="panel-footer"><av target="_blank" id="buttonteam"><i class="fa fa-power-off fa-2x" aria-hidden="true"></i></av></span>
+			</div>
+
+		</div>
+	</div>
+
+	<div id="dropDownSelect1"></div>
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+<!--===============================================================================================-->
+	<script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="../js/jquery-weekdays.js"></script>
+<!--===============================================================================================-->
+	<script src="../vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../vendor/bootstrap/js/popper.js"></script>
+	<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../vendor/daterangepicker/moment.min.js"></script>
+	<script src="../vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="../vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="../js/main.js"></script>
+	<script src="../js/render.js"></script>
+	<script src="../js/dashboard.js"></script>
+    <script>if (window.module) module = window.module;</script>
+</body>
+</html>
