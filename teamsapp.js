@@ -1,7 +1,11 @@
 const { app, BrowserWindow , Menu, Tray, ipcMain, Notification  } = require('electron');
+const nativeImage = require('electron').nativeImage;
 const cron = require('node-cron');
 const AutoLaunch = require('auto-launch');
 const Store = require('./js/store.js');
+const axios = require('axios');
+const path = require('path');
+const iconImage = nativeImage.createFromPath('/images/teams.ico');
 var clockin,clockout;
 const teamsautolauncher = new AutoLaunch({
     name: 'Teams Clock in/out',
@@ -19,19 +23,20 @@ app.setMaxListeners(20);
 app.on('ready', () => {
   var win = new BrowserWindow({
     title: "Microsoft Teams Clock in / out",
-    icon: `${__dirname}/images/teams.png`,
+    icon: iconImage,
     frame: false,
     webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            webSecurity: false
         },
       show: false
   });
   win.on('ready-to-show', ()=>{
       setTimeout(() => {
         win.maximize();
-        }, 800);
+        }, 2000);
   })
-  var appIcon = new Tray(`${__dirname}/images/icons/teams.ico`);
+  var appIcon = new Tray(iconImage);
   const contextMenu = Menu.buildFromTemplate([
         {
             label: 'Exit', click: function () {
@@ -43,7 +48,7 @@ app.on('ready', () => {
   if(store.get('email') !== '*' && store.get('password') !== '*'){
       win.loadURL(`file://${__dirname}/screens/dashboard_screen.html`);
       if (Notification.isSupported() === true){
-          const myNotification = new Notification({title:'Teams',body:'Schedule clock i/o started',icon:`${__dirname}/images/icons/teams.ico`});
+          const myNotification = new Notification({title:'Teams',body:'Schedule clock i/o started',icon:iconImage});
         myNotification.show();
       }
       if(store.get('teams') !== 0){
@@ -54,7 +59,7 @@ app.on('ready', () => {
           }
       }
   }else{
-      win.loadURL(`file://${__dirname}/screens/start_screen.html`);
+      win.loadURL(`file://${__dirname}/screens/start_screen.html`).then(r => console.log(r));
   }
   appIcon.setContextMenu(contextMenu);
   appIcon.on('click', function(e){
@@ -85,7 +90,7 @@ app.on('ready', () => {
     ipcMain.on('closer', (event, arg) => {
         console.log(arg);
         win.hide();
-        appIcon.setImage(`${__dirname}/images/icons/teams.ico`);
+        appIcon.setImage(iconImage);
     })
     ipcMain.on('request-data', (event, arg) => {
         if(arg === true){
@@ -101,7 +106,7 @@ app.on('ready', () => {
                 console.log("Authentication");
                 store.set('email',arg.email);
                 store.set('password',arg.pass);
-                win.loadURL(`file://${__dirname}/screens/dashboard_screen.html`);
+                win.loadURL(`file://${__dirname}/screens/dashboard_screen.html`).then(r => console.log(r));
             } else {
                 event.reply('loading', 'false')
                 console.log("Not Authentication");
@@ -110,7 +115,7 @@ app.on('ready', () => {
     })
     ipcMain.on('logout', (event, arg) => {
         if (arg === 'true') {
-            win.loadURL(`file://${__dirname}/screens/start_screen.html`);
+            win.loadURL(`file://${__dirname}/screens/start_screen.html`).then(r => console.log(r));
             store.set('teams',0);
             store.set('email','*');
             store.set('password','*');
@@ -240,7 +245,7 @@ function clockins(email,password,teams) {
           const myNotification = new Notification({
               title: 'Teams',
               body: 'Clock in registered',
-              icon: `${__dirname}/images/icons/teams.ico`
+              icon: iconImage
           });
           myNotification.show();
       }
@@ -296,7 +301,7 @@ function clockouts(email,password,teams) {
           const myNotification = new Notification({
               title:'Teams',
               body:'Clock out registered',
-              icon:`${__dirname}/images/icons/teams.ico`
+              icon:iconImage
           });
           myNotification.show();
       }
@@ -327,15 +332,14 @@ async function auther(email, password) {
         await sleep(10000);
         await driver.get('https://teams.microsoft.com/_#/apps/42f6c1da-a241-483a-a3cc-4f5be9185951/sections/shifts');
         await sleep(8000);
-        await driver.executeScript("return document.body.innerText").then(value => auth = value);
-        console.log(auth[0]);
-        if (auth[0] !== "I") {
+        await driver.executeScript("return document.body.innerText").then(value => auth = value.slice(0,4));
+        if (auth !== "Inic" && auth !== "Sign") {
             auth = 1;
             if (Notification.isSupported() === true){
               const myNotification = new Notification({
                   title:'Teams',
                   body:'Authentication completed',
-                  icon:`${__dirname}/images/icons/teams.ico`
+                  icon: iconImage
               });
               myNotification.show();
             }

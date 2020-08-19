@@ -18,15 +18,41 @@
     "*.html",
     "build",
     "node_modules",
-    "chromedriver.exe"
+    "chromedriver.exe",
+    "images/teams.ico",
+    "images/teams.png",
+    "screens",
+    "css",
+    "fonts",
+    "images",
+    "vendor",
+    "chromedriver"
   ],
   "build": {
+    "files": [
+      "images/teams.ico",
+      "images/teams.png",
+      "js/*.js",
+      "teamsapp.js",
+      "screens",
+      "css",
+      "fonts",
+      "images",
+      "vendor",
+      "chromedriver"
+    ],
+    "directories": {
+      "output": "realease"
+    },
     "appId": "com.teams.clock",
     "productName": "Microsoft Teams - Clock in-out",
     "copyright": "dermuir",
     "win": {
       "target": "nsis",
-      "icon": "images/teams.ico"
+      "icon": "images/teams.ico",
+      "extraFiles": [
+        "chromedriver.exe"
+      ]
     },
     "nsis": {
       "oneClick": false,
@@ -46,8 +72,11 @@
     "linux": {
       "target": "AppImage",
       "executableName": "Microsoft Teams - Clock in-out",
-      "icon": "images/teams.ico",
-      "category": "Utility"
+      "icon": "images/teams.png",
+      "category": "Utility",
+      "extraFiles": [
+        "chromedriver"
+      ]
     },
     "appImage": {
       "license": "license.txt",
@@ -69,6 +98,7 @@
   },
   "dependencies": {
     "auto-launch": "^5.0.5",
+    "axios": "^0.19.2",
     "custom-electron-titlebar": "^3.2.3",
     "jquery-loading": "^0.2.8",
     "menubar": "^8.0.2",
