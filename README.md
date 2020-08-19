@@ -49,7 +49,8 @@ Please make sure to update tests as appropriate.
 
 ## Donations
 
-BTC: **3QdeHa5PFtU9RruPiFmhbn7mynp7PEy4XZ**
+BTC: **3QdeHa5PFtU9RruPiFmhbn7mynp7PEy4XZ**  
+
 ETH: **0xe933045841add12d7C5110FaD95ceCA27dE5298c**
 
 ## License
