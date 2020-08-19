@@ -47,5 +47,10 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 Please make sure to update tests as appropriate.
 
+## Donations
+
+BTC: **3QdeHa5PFtU9RruPiFmhbn7mynp7PEy4XZ**
+ETH: **0xe933045841add12d7C5110FaD95ceCA27dE5298c**
+
 ## License
 [CPL1.0](https://opensource.org/licenses/cpl1.0.txt)
