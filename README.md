@@ -8,7 +8,7 @@ A simple application for turn in and out ms teams open shifts with a timer and w
 
 ## Dependencies
 
-[Google Chrome](https://www.google.com.mx/chrome/) (If you already have it installed you don't need to download anything else).
+[Google Chrome] v84(https://www.google.com.mx/chrome/) (If you already have it installed you don't need to download anything else).
 
 ## Installation
 
