@@ -1,4 +1,4 @@
-# Microsoft Teams - Clock in / out
+# Microsoft Teams - Clock in/out
 
 A simple application for turn in and out ms teams open shifts with a timer and with a timer that activate it in the background.
 
